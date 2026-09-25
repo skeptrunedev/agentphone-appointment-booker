@@ -1,0 +1,20 @@
+{
+  "businessName": "Example Dermatology",
+  "purpose": "Ask about self-pay milia extraction and book a consultation if possible",
+  "callerName": "YOUR NAME",
+  "callbackNumber": "+14155550123",
+  "timezone": "America/Los_Angeles",
+  "preferredWindows": [
+    "Monday through Friday, 9:00 AM to 11:30 AM",
+    "Tuesday or Thursday, 2:00 PM to 4:30 PM"
+  ],
+  "questions": [
+    "Do you perform milia extraction or removal?",
+    "What are the self-pay consultation and removal prices?",
+    "Can removal be done during the first appointment?",
+    "What is the earliest available appointment?"
+  ],
+  "bookIfAvailable": true,
+  "maxTotalPrice": 350,
+  "notes": "Prefer an office near 582 Market Street, San Francisco. Do not provide insurance information or payment."
+}
