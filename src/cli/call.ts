@@ -84,7 +84,7 @@ async function main(): Promise<void> {
     toNumber: args.to,
     initialGreeting: `Hello, I am an AI assistant calling on behalf of ${task.callerName} about ${task.purpose}. Is now a good time?`,
     systemPrompt: taskInstructions(task),
-    modelTier: "max",
+    modelTier: config.agentPhone.modelTier,
   });
   const callId = callIdFrom(created);
   console.log(`Call started: ${callId}`);

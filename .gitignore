@@ -2,6 +2,7 @@ node_modules/
 dist/
 .env
 .env.local
+task.json
 *.log
 .DS_Store
 .vscode/*.local.json

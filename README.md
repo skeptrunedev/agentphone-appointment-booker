@@ -30,6 +30,7 @@ Fill `.env`:
 |---|---|
 | `AGENTPHONE_API_KEY` | AgentPhone dashboard API key (`sk_live_...`) |
 | `AGENTPHONE_AGENT_ID` | AgentPhone agent ID (`agt_...`) |
+| `AGENTPHONE_MODEL_TIER` | `turbo` by default for the lowest-cost call model; use `balanced` or `max` if desired |
 
 Edit `task.json` for each call. `bookIfAvailable: false` makes the call information-only. `maxTotalPrice` is an authorization ceiling, not permission to provide payment.
 
@@ -37,10 +38,13 @@ Edit `task.json` for each call. `bookIfAvailable: false` makes the call informat
 
 ```sh
 pnpm install
+pnpm run doctor
 pnpm call +14155550123 --task task.json
 ```
 
-The destination must use E.164 format. The command starts the hosted call, waits for it to finish, prints the transcript, and writes the full result to `call-results/`.
+`pnpm run doctor` verifies the credential, configured agent, and active number without placing a call. The call destination must use E.164 format. The call command starts the hosted call, waits for it to finish, prints the transcript, and writes the full result to `call-results/`.
+
+Keep `task.json` local: it is git-ignored because it can contain personal scheduling constraints. Review `businessName`, `callerName`, `callbackNumber`, `preferredWindows`, `bookIfAvailable`, and `maxTotalPrice` before every call.
 
 ## Results
 

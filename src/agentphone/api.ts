@@ -54,6 +54,14 @@ export class AgentPhoneClient {
     return this.request(`/v1/calls/${encodeURIComponent(callId)}/transcript`);
   }
 
+  async getAgent(): Promise<Record<string, unknown>> {
+    return this.request(`/v1/agents/${encodeURIComponent(this.config.agentId)}`);
+  }
+
+  async listNumbers(): Promise<unknown> {
+    return this.request("/v1/numbers");
+  }
+
   private async request(path: string, init: RequestInit = {}): Promise<any> {
     const response = await fetch(`${this.config.baseUrl.replace(/\/$/, "")}${path}`, {
       ...init,
