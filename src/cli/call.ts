@@ -92,6 +92,7 @@ async function main(): Promise<void> {
   const deadline = Date.now() + config.callTimeoutMs;
   let call = created;
   let lastStatus = "";
+  let timedOut = false;
   while (Date.now() < deadline) {
     call = await client.getCall(callId);
     const status = callStatusFrom(call);
@@ -102,7 +103,13 @@ async function main(): Promise<void> {
     if (status === "completed" || status === "failed") break;
     await sleep(config.pollIntervalMs);
   }
-  if (Date.now() >= deadline) throw new Error(`Timed out waiting for call ${callId} to finish.`);
+  if (Date.now() >= deadline && callStatusFrom(call) !== "completed" && callStatusFrom(call) !== "failed") {
+    timedOut = true;
+    console.error(`Maximum call duration reached; ending call ${callId}.`);
+    await client.endCall(callId);
+    await sleep(1000);
+    call = await client.getCall(callId);
+  }
 
   const transcript = await client.getTranscript(callId);
   renderTranscript(transcript);
@@ -114,6 +121,7 @@ async function main(): Promise<void> {
     transcript,
   });
   console.log(`\nSaved result: ${resultPath}`);
+  if (timedOut) process.exitCode = 2;
 }
 
 main().catch((e) => {

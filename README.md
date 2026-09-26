@@ -44,6 +44,8 @@ pnpm call +14155550123 --task task.json
 
 `pnpm run doctor` verifies the credential, configured agent, and active number without placing a call. The call destination must use E.164 format. The call command starts the hosted call, waits for it to finish, prints the transcript, and writes the full result to `call-results/`.
 
+Calls have a configurable hard duration limit (`CALL_TIMEOUT_MS`, four minutes by default). When the limit is reached, the app actively ends the call to control spend.
+
 Keep `task.json` local: it is git-ignored because it can contain personal scheduling constraints. Review `businessName`, `callerName`, `callbackNumber`, `preferredWindows`, `bookIfAvailable`, and `maxTotalPrice` before every call.
 
 ## Results
